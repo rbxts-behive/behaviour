@@ -8,9 +8,14 @@ export default defineConfig(
 	{ ignores: ['out/**/*'] },
 
 	// js/ts lint settings
-	js.configs.recommended,
-	...ts.configs.recommendedTypeChecked,
-	...ts.configs.stylisticTypeChecked,
+	{
+		files: ['**/*.{js,ts}'],
+		extends: [
+			js.configs.recommended,
+			ts.configs.strictTypeChecked,
+			ts.configs.stylisticTypeChecked
+		]
+	},
 
 	{
 		languageOptions: {
