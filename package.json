@@ -6,6 +6,7 @@
   "scripts": {
     "build": "rbxtsc",
     "watch": "rbxtsc -w",
+    "lint": "eslint .",
     "prepublishOnly": "npm run build"
   },
   "repository": {
