@@ -36,6 +36,7 @@
     "@rbxts/compiler-types": "^3.0.0-types.0",
     "@rbxts/types": "^1.0.938",
     "eslint": "^10.7.0",
+    "eslint-plugin-roblox-ts": "^1.4.0",
     "roblox-ts": "^3.0.0",
     "typescript": "^6.0.3"
   }
