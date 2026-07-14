@@ -30,18 +30,13 @@
     "access": "public"
   },
   "devDependencies": {
-    "@behive/prettier-config": "^1.0.0",
-    "@behive/tsconfig": "^1.0.1",
-    "@eslint/js": "^10.0.1",
+    "@behive/eslint-config": "^1.0.0",
+    "@behive/prettier-config": "^1.0.1",
+    "@behive/tsconfig": "^1.0.2",
     "@rbxts/compiler-types": "^3.0.0-types.0",
     "@rbxts/types": "^1.0.938",
     "eslint": "^10.7.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.6",
-    "eslint-plugin-roblox-ts": "^1.4.0",
-    "eslint-plugin-simple-import-sort": "^13.0.0",
     "roblox-ts": "^3.0.0",
-    "typescript": "^6.0.3",
-    "typescript-eslint": "^8.64.0"
+    "typescript": "^6.0.3"
   }
 }
