@@ -1,6 +1,7 @@
 import js from '@eslint/js'
 import { defineConfig } from 'eslint/config'
 import prettier from 'eslint-plugin-prettier/recommended'
+import roblox from 'eslint-plugin-roblox-ts'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
 import ts from 'typescript-eslint'
 
@@ -10,7 +11,12 @@ export default defineConfig(
 	// js/ts lint settings
 	{
 		files: ['**/*.{js,mjs,ts,mts}'],
-		extends: [js.configs.recommended, ts.configs.strictTypeChecked, ts.configs.stylisticTypeChecked],
+		extends: [
+			js.configs.recommended,
+			ts.configs.strictTypeChecked,
+			ts.configs.stylisticTypeChecked,
+			roblox.configs.recommended,
+		],
 		languageOptions: {
 			parserOptions: {
 				projectService: {
@@ -39,6 +45,8 @@ export default defineConfig(
 			'@typescript-eslint/no-unsafe-assignment': 'off',
 			'@typescript-eslint/no-unsafe-call': 'off',
 			'@typescript-eslint/no-unsafe-return': 'off',
+			// Incorrectly flags `typeIs` since it doesn't recognise the `value is Type` return type as a boolean type
+			'roblox-ts/lua-truthiness': 'off',
 		},
 	},
 
