@@ -30,6 +30,7 @@
     "access": "public"
   },
   "devDependencies": {
+    "@behive/tsconfig": "^1.0.1",
     "@eslint/js": "^10.0.1",
     "@rbxts/compiler-types": "^3.0.0-types.0",
     "@rbxts/types": "^1.0.938",
