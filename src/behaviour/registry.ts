@@ -15,7 +15,7 @@ type BehaviourRegistry = Map<RBXObject, Map<BehaviourType, Behaviour>>
 export type ReadonlyBehaviourRegistry = ReadonlyMap<RBXObject, ReadonlyMap<BehaviourType, Behaviour>>
 
 function GetMutableBehaviourRegistry() {
-	if (!(shared.__Behive__BehaviourRegistry instanceof Map)) {
+	if (!typeIs(shared.__Behive__BehaviourRegistry, 'table')) {
 		shared.__Behive__BehaviourRegistry = new Map()
 	}
 
@@ -40,8 +40,8 @@ export function GetBehaviours(instance: RBXObject): readonly Behaviour[] {
 	return behaviours
 }
 
-export async function TryGetBehaviour<T extends Behaviour>(type: BehaviourType<T>, instance: T['Subject']) {
-	const behaviour = GetBehaviourRegistry().get(instance)?.get(type) as T | undefined
+export async function TryGetBehaviour<T extends Behaviour>(ctor: BehaviourType<T>, instance: T['Subject']) {
+	const behaviour = GetBehaviourRegistry().get(instance)?.get(ctor) as T | undefined
 	if (behaviour === undefined) return
 
 	if (behaviour.GetState() !== 'started') {
@@ -51,8 +51,8 @@ export async function TryGetBehaviour<T extends Behaviour>(type: BehaviourType<T
 	return behaviour
 }
 
-export async function GetBehaviour<T extends Behaviour>(type: BehaviourType<T>, instance: T['Subject']) {
-	return (await TryGetBehaviour(type, instance)) ?? error(`Could not find a behaviour on ${debugName(instance)}`)
+export async function GetBehaviour<T extends Behaviour>(ctor: BehaviourType<T>, instance: T['Subject']) {
+	return (await TryGetBehaviour(ctor, instance)) ?? error(`Could not find a behaviour on ${debugName(instance)}`)
 }
 
 // -- Manipulating behaviour registry --
@@ -63,30 +63,30 @@ export const BehaviourAdded = BehaviourAddedEvent.Event
 const BehaviourRemovingEvent = event<[behaviour: Behaviour]>()
 export const BehaviourRemoving = BehaviourRemovingEvent.Event
 
-export async function AddBehaviour<T extends Behaviour>(type: BehaviourType<T>, instance: T['Subject']) {
+export async function AddBehaviour<T extends Behaviour>(ctor: BehaviourType<T>, instance: T['Subject']) {
 	const registry = GetMutableBehaviourRegistry()
 
 	const behaviourByType = ensure(registry, instance, new Map())
 
-	const behaviour = new type(instance)
-	behaviourByType.set(type, behaviour)
+	const behaviour = new ctor(instance)
+	behaviourByType.set(ctor, behaviour)
 	BehaviourAddedEvent.Fire(behaviour)
 
 	await behaviour.Start()
 	return behaviour
 }
 
-export async function RemoveBehaviour<T extends Behaviour>(type: BehaviourType<T>, instance: T['Subject']) {
+export async function RemoveBehaviour<T extends Behaviour>(ctor: BehaviourType<T>, instance: T['Subject']) {
 	const registry = GetMutableBehaviourRegistry()
 
 	const behaviourByType = ensure(registry, instance, new Map())
-	const behaviour = behaviourByType.get(type)
+	const behaviour = behaviourByType.get(ctor)
 	if (behaviour === undefined) return
 
 	BehaviourRemovingEvent.Fire(behaviour)
 
 	await behaviour.Stop()
-	behaviourByType.delete(type)
+	behaviourByType.delete(ctor)
 }
 
 // utils

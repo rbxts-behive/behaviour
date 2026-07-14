@@ -9,15 +9,8 @@ export default defineConfig(
 
 	// js/ts lint settings
 	{
-		files: ['**/*.{js,ts}'],
-		extends: [
-			js.configs.recommended,
-			ts.configs.strictTypeChecked,
-			ts.configs.stylisticTypeChecked
-		]
-	},
-
-	{
+		files: ['**/*.{js,mjs,ts,mts}'],
+		extends: [js.configs.recommended, ts.configs.strictTypeChecked, ts.configs.stylisticTypeChecked],
 		languageOptions: {
 			parserOptions: {
 				projectService: {
@@ -45,7 +38,6 @@ export default defineConfig(
 			'@typescript-eslint/no-unsafe-member-access': 'off',
 			'@typescript-eslint/no-unsafe-assignment': 'off',
 			'@typescript-eslint/no-unsafe-call': 'off',
-			'@typescript-eslint/no-unsafe-error': 'off',
 			'@typescript-eslint/no-unsafe-return': 'off',
 		},
 	},
