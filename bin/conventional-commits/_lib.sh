@@ -2,7 +2,7 @@
 # Shared Conventional Commits definitions. Source this file — do not execute it.
 
 PATTERN='^(feat|fix|docs|chore|refactor|test|ci|build|perf|style|revert)(\([a-zA-Z0-9._-]+\))?!?: .+'
-TYPES='feat, fix, docs, chore, refactor, test, ci, build, perf, style, revert'
+TYPES='feat, fix, docs, chore, refactor, test, ci, build, perf, style, revert, lint'
 HASH_RE='[0-9a-f]{5,40}'
 PR_RE='#[0-9]+'
 
