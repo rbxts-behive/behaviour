@@ -1,8 +1,1 @@
-{
-	"printWidth": 120,
-	"tabWidth": 4,
-	"trailingComma": "all",
-	"useTabs": true,
-	"singleQuote": true,
-	"semi": false
-}
+"@behive/prettier-config/roblox-ts.js"
